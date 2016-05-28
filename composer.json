@@ -1,7 +1,7 @@
 {
     "name": "korobochkin/woocommerce-multicurrencies",
     "description": "WordPress plugin",
-    "type": "wp-plugin",
+    "type": "wordpress-plugin",
     "license": "MIT",
     "authors": [
         {
@@ -12,5 +12,10 @@
     "minimum-stability": "dev",
     "require": {
         "leewillis77/open-exchange-rates-api": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Korobochkin\\WCMultiCurrencies\\": "src/"
+        }
     }
 }
