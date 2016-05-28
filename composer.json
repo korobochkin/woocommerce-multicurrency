@@ -1,0 +1,14 @@
+{
+    "name": "korobochkin/woocommerce-multicurrencies",
+    "description": "WordPress plugin",
+    "type": "wp-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kolya Korobochkin",
+            "email": "me@korobochkin.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
