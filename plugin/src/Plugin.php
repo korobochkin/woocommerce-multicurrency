@@ -22,6 +22,8 @@ class Plugin {
 	}
 
 	public function run(){
-
+		if( is_admin() ) {
+			Admin\Admin::run();
+		}
 	}
 }
