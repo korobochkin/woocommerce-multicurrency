@@ -27,16 +27,18 @@ abstract class Page {
 	}
 
 	public function register() {
-		$page = add_submenu_page(
-			$this->get_parent_slug(),
-			$this->get_page_title(),
-			$this->get_menu_title(),
-			$this->get_capability(),
-			$this->get_full_page_menu_slug(),
-			array( '\Setka\WPGridEditor\Admin\Settings\OptionsGeneral\Pages\General\Page', 'render' )
-		);
-		if( $page ) {
-			add_action( 'load-' . $page, array( '\Setka\WPGridEditor\Admin\Settings\OptionsGeneral\Pages\General\Page', 'register_help_tabs' ) );
+		if( $this->is_valid() ) {
+			$page = add_submenu_page(
+				$this->get_parent_slug(),
+				$this->get_page_title(),
+				$this->get_menu_title(),
+				$this->get_capability(),
+				$this->get_full_page_menu_slug(),
+				array( '\Setka\WPGridEditor\Admin\Settings\OptionsGeneral\Pages\General\Page', 'render' )
+			);
+			if( $page ) {
+				add_action( 'load-' . $page, array( '\Setka\WPGridEditor\Admin\Settings\OptionsGeneral\Pages\General\Page', 'register_help_tabs' ) );
+			}
 		}
 	}
 
