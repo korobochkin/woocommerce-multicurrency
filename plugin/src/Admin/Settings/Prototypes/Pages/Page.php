@@ -17,13 +17,31 @@ abstract class Page {
 
 	private $function = null;
 
-	public function __construct( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function = '' ) {
+	/**
+	 * @var \Korobochkin\WCMultiCurrencies\Admin\Settings\Prototypes\Pages\HelpTabs\HelpTab[]
+	 */
+	private $help_tabs = array();
+
+	private $help_sidebar = null;
+
+	public function __construct(
+		$parent_slug,
+		$page_title,
+		$menu_title,
+		$capability,
+		$menu_slug,
+		$function = '',
+		$help_tabs = array(),
+		$help_sidebar
+	) {
 		$this->set_parent_slug( $parent_slug );
 		$this->set_page_title( $page_title );
 		$this->set_menu_title( $menu_title );
 		$this->set_capability( $capability );
 		$this->set_menu_slug( $menu_slug );
 		$this->set_function( $function );
+		$this->set_help_tabs( $help_tabs );
+		$this->set_help_sidebar( $help_sidebar );
 	}
 
 	public function register() {
@@ -34,16 +52,33 @@ abstract class Page {
 				$this->get_menu_title(),
 				$this->get_capability(),
 				$this->get_full_page_menu_slug(),
-				array( '\Setka\WPGridEditor\Admin\Settings\OptionsGeneral\Pages\General\Page', 'render' )
+				$this->get_function()
 			);
 			if( $page ) {
-				add_action( 'load-' . $page, array( '\Setka\WPGridEditor\Admin\Settings\OptionsGeneral\Pages\General\Page', 'register_help_tabs' ) );
+				add_action( 'load-' . $page, array( $this, 'register_help_tabs' ) );
 			}
 		}
 	}
 
+	public function register_help_tabs() {
+		if( $this->is_help_tabs() ) {
+			foreach( $this->help_tabs as $help_tab ) {
+				$help_tab->register();
+			}
+
+			// Help Sidebar
+			$this->register_help_sidebar();
+		}
+	}
+
+	public function register_help_sidebar() {
+		if( $this->is_help_sidebar_valid( $this->help_sidebar ) ) {
+			$this->help_sidebar->register();
+		}
+	}
+
 	final public function is_valid() {
-		if( !$this->is_parent_slug_valid( $this->get_parent_slug() ) )
+		if( !$this->is_parent_slug_valid( $this->parent_slug ) )
 			return false;
 
 		if( !$this->is_page_title_valid( $this->page_title ) )
@@ -160,6 +195,7 @@ abstract class Page {
 	}
 
 	final public function get_full_page_menu_slug() {
+		// TODO: вынести Plugin::NAME
 		return Plugin::NAME . '-' . $this->get_menu_slug();
 	}
 
@@ -178,6 +214,71 @@ abstract class Page {
 	final public function is_function_valid( $callback ) {
 		if( is_callable( $callback ) ) {
 			return true;
+		}
+		return false;
+	}
+
+	final public function set_help_tabs( $help_tabs ) {
+		if( is_array( $help_tabs ) && !empty( $help_tabs ) ) {
+			foreach ( $help_tabs as $help_tab ) {
+				$this->set_help_tab( $help_tab );
+			}
+			return $this->is_help_tabs();
+		}
+		return false;
+	}
+
+	final public function set_help_tab( HelpTabs\HelpTab $help_tab ) {
+		if( class_exists( $help_tab ) ) {
+			$try = new $help_tab();
+
+			if( $this->is_help_tab_valid( $try ) ) {
+				$this->help_tabs[$try->get_id()] = $try;
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	final public function get_help_tabs() {
+		return $this->help_tabs;
+	}
+
+	final public function is_help_tab_valid( $help_tab ) {
+		if( is_a( $help_tab, 'HelpTabs\HelpTab' ) ) {
+			return $help_tab->is_valid();
+		}
+		return false;
+	}
+
+	final public function is_help_tabs() {
+		if( !empty( $this->help_tabs ) ) {
+			return true;
+		}
+		return false;
+	}
+
+	final public function set_help_sidebar( $help_sidebar ) {
+		if( class_exists( $help_sidebar ) ) {
+			$try = new $help_sidebar();
+
+			if( $this->is_help_tab_valid( $try ) ) {
+				$this->help_sidebar = $try;
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	final public function get_help_sidebar() {
+		return $this->help_sidebar;
+	}
+
+	final public function is_help_sidebar_valid( $help_sidebar ) {
+		if( is_a( $help_sidebar, 'HelpSidebars\HelpSidebar' ) ) {
+			return $help_sidebar->is_valid();
 		}
 		return false;
 	}
