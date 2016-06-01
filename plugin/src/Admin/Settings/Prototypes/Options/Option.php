@@ -35,7 +35,9 @@ abstract class DefaultOption {
 	public function set_name( $name ) {
 		if( is_string( $name ) && $name != '' ) {
 			$this->name = $name;
+			return true;
 		}
+		return false;
 	}
 
 	public function get_group() {
@@ -45,7 +47,9 @@ abstract class DefaultOption {
 	public function set_group( $group ) {
 		if( is_string( $group ) && $group != '' ) {
 			$this->group = $group;
+			return true;
 		}
+		return false;
 	}
 
 	abstract public function get_defaults();
