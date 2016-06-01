@@ -11,11 +11,6 @@ class Rates extends DefaultOption {
 		parent::__construct( Plugin::NAME . '-rates', Plugin::NAME . '-rates' );
 	}
 
-	/*public static function register() {
-		self::set_name(Plugin::NAME . '-rates');
-		self::set_group(Plugin::NAME . '-rates');
-	}*/
-
 	public function sanitize( $instance ) {
 		return $instance;
 	}
