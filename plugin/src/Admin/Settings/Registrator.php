@@ -4,7 +4,7 @@ namespace Korobochkin\WCMultiCurrencies\Admin\Settings;
 class Registrator {
 
 	/**
-	 * @var array Korobochkin\WCMultiCurrencies\Admin\Settings\Prototypes\Options\DefaultOption
+	 * @var \Korobochkin\WCMultiCurrencies\Admin\Settings\Options\Rates[] |\Korobochkin\WCMultiCurrencies\Admin\Settings\Prototypes\Options\DefaultOption[]
 	 */
 	public static $options = array();
 
@@ -14,7 +14,6 @@ class Registrator {
 
 		// Before register settings
 		add_action( 'admin_init', array( __CLASS__, 'before_register_settings' ) );
-
 		// Register settings
 		add_action( 'admin_init', array( __CLASS__, 'register_settings' ) );
 	}
@@ -43,5 +42,9 @@ class Registrator {
 				$option->register();
 			}
 		}
+	}
+
+	public static function register_pages() {
+
 	}
 }
