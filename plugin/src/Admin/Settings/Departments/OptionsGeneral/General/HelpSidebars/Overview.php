@@ -6,7 +6,6 @@ use Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes;
 class Overview extends Prototypes\Pages\HelpSidebars\HelpSidebar {
 
 	public function __construct() {
-		//$this->set_content( $content );
-		parent::__construct( 'Some content in sidebar.' );
+		parent::__construct( '<p>Some content in sidebar.</p>' );
 	}
 }
