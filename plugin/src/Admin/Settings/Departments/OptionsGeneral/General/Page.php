@@ -15,7 +15,11 @@ class Page extends Pages\Page {
 			'general',
 			array( $this, 'render' ),
 
-			Plugin::NAME . '-rates'
+			Plugin::NAME . '-rates',
+
+			array(
+				'\Korobochkin\WCMultiCurrency\Admin\Settings\Departments\OptionsGeneral\General\HelpTabs\Overview'
+			)
 		);
 	}
 }

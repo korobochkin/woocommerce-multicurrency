@@ -90,6 +90,8 @@ abstract class HelpTab {
 		return $this->content;
 	}
 
+	abstract public function build_content();
+
 	final public function is_content_valid( $content ) {
 		if( is_string( $content ) ) {
 			return true;

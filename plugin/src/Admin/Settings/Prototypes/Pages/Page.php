@@ -242,7 +242,7 @@ abstract class Page {
 		return false;
 	}
 
-	final public function set_help_tab( HelpTabs\HelpTab $help_tab ) {
+	final public function set_help_tab( $help_tab ) {
 		if( class_exists( $help_tab ) ) {
 			$try = new $help_tab();
 
@@ -260,7 +260,7 @@ abstract class Page {
 	}
 
 	final public function is_help_tab_valid( $help_tab ) {
-		if( is_a( $help_tab, 'HelpTabs\HelpTab' ) ) {
+		if( is_a( $help_tab, '\Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\HelpTabs\HelpTab' ) ) {
 			return $help_tab->is_valid();
 		}
 		return false;
