@@ -321,4 +321,8 @@ abstract class Page {
 		</form>
 		</div><?php
 	}
+
+	public function get_url() {
+		return admin_url( $this->get_parent_slug() . '?page=' . self::get_menu_slug() );
+	}
 }
