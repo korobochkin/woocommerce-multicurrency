@@ -62,7 +62,7 @@ abstract class Page {
 				$this->get_page_title(),
 				$this->get_menu_title(),
 				$this->get_capability(),
-				$this->get_full_page_menu_slug(),
+				$this->get_menu_slug(),
 				$this->get_function()
 			);
 			if( $page ) {
@@ -208,11 +208,6 @@ abstract class Page {
 		return false;
 	}
 
-	final public function get_full_page_menu_slug() {
-		// TODO: вынести Plugin::NAME
-		return Plugin::NAME . '-' . $this->get_menu_slug();
-	}
-
 	final public function set_function( $callback ) {
 		if( $this->is_function_valid( $callback ) ) {
 			$this->function = $callback;
@@ -322,7 +317,7 @@ abstract class Page {
 		<form action="options.php" method="post">
 			<?php
 			settings_fields( $this->get_option_group() );
-			do_settings_sections( $this->get_full_page_menu_slug() );
+			do_settings_sections( $this->get_menu_slug() );
 			submit_button();
 			?>
 		</form>

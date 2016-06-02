@@ -12,7 +12,7 @@ class Page extends Pages\Page {
 			__( 'Multi Currency', Plugin::NAME ),
 			__( 'Multi Currency', Plugin::NAME ),
 			'manage_options',
-			'general',
+			Plugin::NAME . '-general',
 			array( $this, 'render' ),
 
 			Plugin::NAME . '-rates',
