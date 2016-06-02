@@ -3,7 +3,7 @@ namespace Korobochkin\WCMultiCurrency;
 
 class Plugin {
 
-	const NAME = 'wc-multi-currencies';
+	const NAME = 'wc-multi-currency';
 
 	private $plugin_path = NULL;
 
