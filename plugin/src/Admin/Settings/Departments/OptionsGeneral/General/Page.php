@@ -15,10 +15,13 @@ class Page extends Pages\Page {
 			Plugin::NAME . '-general',
 			array( $this, 'render' ),
 
+			// Option group
 			Plugin::NAME . '-rates',
 
+			// Tabs
 			array( __NAMESPACE__ . '\HelpTabs\Overview' ),
 
+			// Sidebars
 			__NAMESPACE__ . '\HelpSidebars\Overview'
 		);
 	}
