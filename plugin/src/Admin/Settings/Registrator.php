@@ -52,7 +52,7 @@ class Registrator {
 
 	public static function before_register_pages() {
 		$page = new Departments\OptionsGeneral\General\Page();
-		$page_name = $page->get_full_page_menu_slug();
+		$page_name = $page->get_menu_slug();
 		if( $page_name ) {
 			self::$pages[$page_name] = $page;
 		}
