@@ -1,5 +1,5 @@
 <?php
-namespace Korobochkin\WCMultiCurrencies\Admin\Settings\Prototypes\Pages\HelpSidebars;
+namespace Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\HelpSidebars;
 
 abstract class HelpSidebar {
 

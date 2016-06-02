@@ -1,5 +1,5 @@
 <?php
-namespace Korobochkin\WCMultiCurrencies\Admin;
+namespace Korobochkin\WCMultiCurrency\Admin;
 
 class Admin {
 

@@ -1,5 +1,5 @@
 <?php
-namespace Korobochkin\WCMultiCurrencies\Admin\Settings\Prototypes\Options;
+namespace Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Options;
 
 abstract class DefaultOption {
 

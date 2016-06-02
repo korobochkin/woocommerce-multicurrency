@@ -1,16 +1,16 @@
 <?php
-namespace Korobochkin\WCMultiCurrencies\Admin\Settings;
+namespace Korobochkin\WCMultiCurrency\Admin\Settings;
 
 class Registrator {
 
 	/**
-	 * @var \Korobochkin\WCMultiCurrencies\Admin\Settings\Options\Rates[] |\Korobochkin\WCMultiCurrencies\Admin\Settings\Prototypes\Options\DefaultOption[]
+	 * @var \Korobochkin\WCMultiCurrency\Admin\Settings\Options\Rates[] |\Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Options\DefaultOption[]
 	 */
 	public static $options = array();
 
 	public static function init() {
-		add_action( 'admin_menu', array( '\Korobochkin\WCMultiCurrencies\Admin\Settings\OptionsGeneral\Pages', 'register_pages' ) );
-		add_action( 'admin_init', array( '\Korobochkin\WCMultiCurrencies\Admin\Settings\OptionsGeneral\Pages\General\Page', 'init' ) );
+		add_action( 'admin_menu', array( '\Korobochkin\WCMultiCurrency\Admin\Settings\OptionsGeneral\Pages', 'register_pages' ) );
+		add_action( 'admin_init', array( '\Korobochkin\WCMultiCurrency\Admin\Settings\OptionsGeneral\Pages\General\Page', 'init' ) );
 
 		// Before register settings
 		add_action( 'admin_init', array( __CLASS__, 'before_register_settings' ) );

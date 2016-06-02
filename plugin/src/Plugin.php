@@ -1,5 +1,5 @@
 <?php
-namespace Korobochkin\WCMultiCurrencies;
+namespace Korobochkin\WCMultiCurrency;
 
 class Plugin {
 

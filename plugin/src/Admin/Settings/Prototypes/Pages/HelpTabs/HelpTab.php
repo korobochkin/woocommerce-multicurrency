@@ -1,5 +1,5 @@
 <?php
-namespace Korobochkin\WCMultiCurrencies\Admin\Settings\Prototypes\Pages\HelpTabs;
+namespace Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\HelpTabs;
 
 abstract class HelpTab {
 

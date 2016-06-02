@@ -1,5 +1,5 @@
 <?php
-namespace Korobochkin\WCMultiCurrencies;
+namespace Korobochkin\WCMultiCurrency;
 /*
 Plugin Name: WooCommerce multi currencies
 Plugin URI: https://www.woothemes.com
@@ -20,19 +20,19 @@ License: GPLv2 or later
  * @since 0.0.1
  */
 require_once 'vendor/autoload.php';
-$GLOBALS['WCMultiCurrenciesPlugin'] = new Plugin( __FILE__ );
-$GLOBALS['WCMultiCurrenciesPlugin']->run();
+$GLOBALS['WCMultiCurrencyPlugin'] = new Plugin( __FILE__ );
+$GLOBALS['WCMultiCurrencyPlugin']->run();
 
 /**
  * Activation. WordPress call this when user click "Activate" link.
  *
  * @since 0.0.1
  */
-//register_activation_hook( __FILE__, array( '\Korobochkin\WCMultiCurrencies\Service\Activation', 'run' ) );
+//register_activation_hook( __FILE__, array( '\Korobochkin\WCMultiCurrency\Service\Activation', 'run' ) );
 
 /**
  * Uninstall. WordPress call this when user click "Delete" link.
  *
  * @since 0.0.1
  */
-//register_uninstall_hook( __FILE__, array( '\Korobochkin\WCMultiCurrencies\Service\Uninstall', 'run' ) );
+//register_uninstall_hook( __FILE__, array( '\Korobochkin\WCMultiCurrency\Service\Uninstall', 'run' ) );

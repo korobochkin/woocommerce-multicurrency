@@ -1,8 +1,8 @@
 <?php
-namespace Korobochkin\WCMultiCurrencies\Admin\Settings\Options;
+namespace Korobochkin\WCMultiCurrency\Admin\Settings\Options;
 
-use \Korobochkin\WCMultiCurrencies\Plugin;
-use \Korobochkin\WCMultiCurrencies\Admin\Settings\Prototypes\Options\DefaultOption;
+use \Korobochkin\WCMultiCurrency\Plugin;
+use \Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Options\DefaultOption;
 
 class Rates extends DefaultOption {
 

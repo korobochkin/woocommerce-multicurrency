@@ -1,7 +1,7 @@
 <?php
-namespace Korobochkin\WCMultiCurrencies\Admin\Settings\Prototypes\Pages;
+namespace Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages;
 
-use \Korobochkin\WCMultiCurrencies\Plugin;
+use \Korobochkin\WCMultiCurrency\Plugin;
 
 abstract class Page {
 
@@ -18,7 +18,7 @@ abstract class Page {
 	private $function = null;
 
 	/**
-	 * @var \Korobochkin\WCMultiCurrencies\Admin\Settings\Prototypes\Pages\HelpTabs\HelpTab[]
+	 * @var \Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\HelpTabs\HelpTab[]
 	 */
 	private $help_tabs = array();
 
