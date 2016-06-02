@@ -1,8 +1,6 @@
 <?php
 namespace Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages;
 
-use \Korobochkin\WCMultiCurrency\Plugin;
-
 abstract class Page {
 
 	private $parent_slug = null;
@@ -272,7 +270,7 @@ abstract class Page {
 		if( class_exists( $help_sidebar ) ) {
 			$try = new $help_sidebar();
 
-			if( $this->is_help_tab_valid( $try ) ) {
+			if( $this->is_help_sidebar_valid( $try ) ) {
 				$this->help_sidebar = $try;
 				return true;
 			}
@@ -286,7 +284,7 @@ abstract class Page {
 	}
 
 	final public function is_help_sidebar_valid( $help_sidebar ) {
-		if( is_a( $help_sidebar, 'HelpSidebars\HelpSidebar' ) ) {
+		if( is_a( $help_sidebar, 'Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\HelpSidebars\HelpSidebar' ) ) {
 			return $help_sidebar->is_valid();
 		}
 		return false;

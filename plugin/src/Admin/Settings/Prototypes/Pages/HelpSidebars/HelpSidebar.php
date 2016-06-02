@@ -26,6 +26,13 @@ abstract class HelpSidebar {
 		return $this->content;
 	}
 
+	final public function is_valid() {
+		if( !$this->is_content_valid( $this->content ) )
+			return false;
+
+		return true;
+	}
+
 	final public function is_content_valid( $content ) {
 		if( is_string( $content ) ) {
 			return true;

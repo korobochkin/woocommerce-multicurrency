@@ -1,7 +1,7 @@
 <?php
 namespace Korobochkin\WCMultiCurrency\Admin\Settings\Departments\OptionsGeneral\General;
 
-use \Korobochkin\WCMultiCurrency\Plugin;
+use Korobochkin\WCMultiCurrency\Plugin;
 use Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages;
 
 class Page extends Pages\Page {
@@ -17,9 +17,9 @@ class Page extends Pages\Page {
 
 			Plugin::NAME . '-rates',
 
-			array(
-				'\Korobochkin\WCMultiCurrency\Admin\Settings\Departments\OptionsGeneral\General\HelpTabs\Overview'
-			)
+			array( __NAMESPACE__ . '\HelpTabs\Overview' ),
+
+			__NAMESPACE__ . '\HelpSidebars\Overview'
 		);
 	}
 }
