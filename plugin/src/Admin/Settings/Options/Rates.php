@@ -2,9 +2,9 @@
 namespace Korobochkin\WCMultiCurrency\Admin\Settings\Options;
 
 use \Korobochkin\WCMultiCurrency\Plugin;
-use \Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Options\DefaultOption;
+use \Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Options\Option;
 
-class Rates extends DefaultOption {
+class Rates extends Option {
 
 	public function __construct() {
 		// Construct with parent
