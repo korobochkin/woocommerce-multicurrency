@@ -1,7 +1,7 @@
 <?php
 namespace Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Options;
 
-abstract class Option {
+abstract class Option implements OptionInterface {
 
 	private $name = null;
 
