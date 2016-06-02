@@ -17,6 +17,8 @@ abstract class Page {
 
 	private $function = null;
 
+	private $option_group = null;
+
 	/**
 	 * @var \Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\HelpTabs\HelpTab[]
 	 */
@@ -25,14 +27,20 @@ abstract class Page {
 	private $help_sidebar = null;
 
 	public function __construct(
+		// For add_submenu_page()
 		$parent_slug,
 		$page_title,
 		$menu_title,
 		$capability,
 		$menu_slug,
 		$function = '',
+
+		// Option group (used in render())
+		$option_group,
+
+		// Help tabs & sidebar
 		$help_tabs = array(),
-		$help_sidebar
+		$help_sidebar = null
 	) {
 		$this->set_parent_slug( $parent_slug );
 		$this->set_page_title( $page_title );
@@ -40,6 +48,9 @@ abstract class Page {
 		$this->set_capability( $capability );
 		$this->set_menu_slug( $menu_slug );
 		$this->set_function( $function );
+
+		$this->set_option_group( $option_group );
+
 		$this->set_help_tabs( $help_tabs );
 		$this->set_help_sidebar( $help_sidebar );
 	}
@@ -94,6 +105,9 @@ abstract class Page {
 			return false;
 
 		if( !$this->is_function_valid( $this->function ) )
+			return false;
+
+		if( !$this->is_option_group_valid( $this->option_group ) )
 			return false;
 
 		return true;
@@ -281,5 +295,37 @@ abstract class Page {
 			return $help_sidebar->is_valid();
 		}
 		return false;
+	}
+
+	final public function set_option_group( $option_group ) {
+		if( $this->is_option_group_valid( $option_group ) ) {
+			$this->option_group = $option_group;
+			return true;
+		}
+		return false;
+	}
+
+	final public function get_option_group() {
+		return $this->option_group;
+	}
+
+	final public function is_option_group_valid( $option_group ) {
+		if( is_string( $option_group ) && !empty( $option_group ) ) {
+			return true;
+		}
+		return false;
+	}
+
+	public function render() {
+		?><div class="wrap">
+		<h2><?php echo $this->get_page_title(); ?></h2>
+		<form action="options.php" method="post">
+			<?php
+			settings_fields( $this->get_option_group() );
+			do_settings_sections( $this->get_full_page_menu_slug() );
+			submit_button();
+			?>
+		</form>
+		</div><?php
 	}
 }
