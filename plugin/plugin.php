@@ -1,13 +1,13 @@
 <?php
 namespace Korobochkin\WCMultiCurrency;
 /*
-Plugin Name: WooCommerce multi currencies
+Plugin Name: WooCommerce Multi Currency
 Plugin URI: https://www.woothemes.com
-Description: WooCommerce multi currencies
+Description: WooCommerce Multi Currency
 Author: Kolya Korobochkin
 Author URI: http://korobochkin.com/
 Version: 0.0.1
-Text Domain: wc-multi-currencies
+Text Domain: wc-multi-currency
 Domain Path: /languages/
 Requires at least: 4.4.2
 Tested up to: 4.4.2
