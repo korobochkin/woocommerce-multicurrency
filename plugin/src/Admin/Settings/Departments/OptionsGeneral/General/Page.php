@@ -25,6 +25,6 @@ class Page extends Pages\Page {
 			__NAMESPACE__ . '\HelpSidebars\Overview'
 		);
 
-		$this->add_section( 'Korobochkin\WCMultiCurrency\Admin\Settings\Departments\OptionsGeneral\General\Sections\General' );
+		$this->add_section( 'Korobochkin\WCMultiCurrency\Admin\Settings\Departments\OptionsGeneral\General\Sections\General\Section' );
 	}
 }

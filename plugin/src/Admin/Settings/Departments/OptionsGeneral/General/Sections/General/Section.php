@@ -1,9 +1,10 @@
 <?php
-namespace Korobochkin\WCMultiCurrency\Admin\Settings\Departments\OptionsGeneral\General\Sections;
+namespace Korobochkin\WCMultiCurrency\Admin\Settings\Departments\OptionsGeneral\General\Sections\General;
 
 use Korobochkin\WCMultiCurrency\Plugin;
+use Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes;
 
-class General extends \Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\Sections\Section {
+class Section extends Prototypes\Pages\Sections\Section {
 
 
 	public function __construct( $parent ) {
