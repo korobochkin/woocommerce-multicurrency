@@ -323,6 +323,13 @@ abstract class Page {
 	}
 
 	public function get_url() {
-		return admin_url( $this->get_parent_slug() . '?page=' . self::get_menu_slug() );
+
+		// TODO: проверить
+		return add_query_arg(
+			'page',
+			$this->get_menu_slug(),
+			admin_url( $this->get_parent_slug() )
+		);
+		//return admin_url( $this->get_parent_slug() . '?page=' . self::get_menu_slug() );
 	}
 }
