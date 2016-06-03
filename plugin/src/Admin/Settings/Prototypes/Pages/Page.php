@@ -24,6 +24,8 @@ abstract class Page {
 
 	private $help_sidebar = null;
 
+	private $sections = array();
+
 	public function __construct(
 		// For add_submenu_page()
 		$parent_slug,
@@ -38,7 +40,10 @@ abstract class Page {
 
 		// Help tabs & sidebar
 		$help_tabs = array(),
-		$help_sidebar = null
+		$help_sidebar = null//,
+
+		// Sections
+		//$sections = array()
 	) {
 		$this->set_parent_slug( $parent_slug );
 		$this->set_page_title( $page_title );
@@ -51,6 +56,8 @@ abstract class Page {
 
 		$this->set_help_tabs( $help_tabs );
 		$this->set_help_sidebar( $help_sidebar );
+
+		//$this->add_sections( $sections );
 	}
 
 	public function register() {
@@ -65,6 +72,7 @@ abstract class Page {
 			);
 			if( $page ) {
 				add_action( 'load-' . $page, array( $this, 'register_help_tabs' ) );
+				add_action( 'load-' . $page, array( $this, 'register_sections' ) );
 			}
 		}
 	}
@@ -83,6 +91,14 @@ abstract class Page {
 	public function register_help_sidebar() {
 		if( $this->is_help_sidebar_valid( $this->help_sidebar ) ) {
 			$this->help_sidebar->register();
+		}
+	}
+
+	public function register_sections() {
+		if( $this->is_sections() ) {
+			foreach( $this->sections as $section ) {
+				$section->register();
+			}
 		}
 	}
 
@@ -236,6 +252,7 @@ abstract class Page {
 	}
 
 	final public function set_help_tab( $help_tab ) {
+		// TODO: мы можем не делать инициализацию прямо сейчас. мы можем делать это во время загрузки конкретно нашей страницы
 		if( class_exists( $help_tab ) ) {
 			$try = new $help_tab();
 
@@ -331,5 +348,38 @@ abstract class Page {
 			admin_url( $this->get_parent_slug() )
 		);
 		//return admin_url( $this->get_parent_slug() . '?page=' . self::get_menu_slug() );
+	}
+
+
+	public function add_sections( $sections ) {
+		if( is_array( $sections ) && !empty( $sections ) ) {
+			foreach( $sections as $section ) {
+				$this->add_section( $sections );
+			}
+		}
+	}
+
+	public function add_section( $section ) {
+		if( class_exists( $section ) ) {
+			$try = new $section($this);
+
+			if( is_a( $try, '\Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\Sections\Section' ) ) {
+
+				if( $try->is_valid() ) {
+					$this->sections[$try->get_id()] = $try;
+				}
+			}
+		}
+	}
+
+	public function is_sections() {
+		if( !empty( $this->sections ) ) {
+			return true;
+		}
+		return false;
+	}
+
+	public function remove_section( $id ) {
+		unset( $this->sections[$id] );
 	}
 }

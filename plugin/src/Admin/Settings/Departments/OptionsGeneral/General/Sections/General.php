@@ -15,7 +15,7 @@ class General extends \Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pag
 	}
 
 	public function render() {
-
+		echo 'blabla';
 	}
 
 	public function sanitize() {
