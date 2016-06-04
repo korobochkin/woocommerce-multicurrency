@@ -4,7 +4,7 @@ namespace Korobochkin\WCMultiCurrency\Admin\Settings\Departments\OptionsGeneral\
 use Korobochkin\WCMultiCurrency\Plugin;
 use Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages;
 
-class Page extends Pages\Page {
+class Page extends Pages\SubMenuPage {
 
 	public function __construct() {
 		parent::__construct(
@@ -13,7 +13,7 @@ class Page extends Pages\Page {
 			__( 'Multi Currency', Plugin::NAME ),
 			'manage_options',
 			Plugin::NAME . '-general',
-			array( $this, 'render' ),
+			//array( $this, 'render' ),
 
 			// Option group
 			Plugin::NAME . '-rates',

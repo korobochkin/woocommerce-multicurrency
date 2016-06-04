@@ -1,29 +1,57 @@
 <?php
 namespace Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages;
 
-abstract class Page {
+abstract class SubMenuPage {
 
-	private $parent_slug = null;
+	/**
+	 * @var string Example: 'options-general.php'.
+	 */
+	private $parent_slug;
 
-	private $page_title = null;
+	/**
+	 * @var string Page title used in <h1> & <title>.
+	 */
+	private $page_title;
 
-	private $menu_title = null;
+	/**
+	 * @var string Menu title (for WordPress Admin Menu at the left side of the page).
+	 */
+	private $menu_title;
 
-	private $capability = null;
+	/**
+	 * @var string Capability name, example 'manage_options'
+	 */
+	private $capability;
 
-	private $menu_slug = null;
+	/**
+	 * @var string This page slug used in URL. Example: /wp-admin/options-general.php?page=YOUR-SLUG_SHOWS_HERE.
+	 * Can contain "-" and "_".
+	 */
+	private $menu_slug;
 
-	private $function = null;
+	/**
+	 * @var null|callable Callback which renders the page.
+	 */
+	//private $function;
 
-	private $option_group = null;
+	/**
+	 * @var string Which option group page contains. Must equal to group while you call register_setting().
+	 */
+	private $option_group;
 
 	/**
 	 * @var \Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\HelpTabs\HelpTab[]
 	 */
 	private $help_tabs = array();
 
-	private $help_sidebar = null;
+	/**
+	 * @var \Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\HelpSidebars\HelpSidebar
+	 */
+	private $help_sidebar;
 
+	/**
+	 * @var \Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\Sections\Section[]
+	 */
 	private $sections = array();
 
 	public function __construct(
@@ -33,7 +61,7 @@ abstract class Page {
 		$menu_title,
 		$capability,
 		$menu_slug,
-		$function = '',
+		//$function = '',
 
 		// Option group (used in render())
 		$option_group,
@@ -50,7 +78,7 @@ abstract class Page {
 		$this->set_menu_title( $menu_title );
 		$this->set_capability( $capability );
 		$this->set_menu_slug( $menu_slug );
-		$this->set_function( $function );
+		//$this->set_function( $function );
 
 		$this->set_option_group( $option_group );
 
@@ -68,7 +96,7 @@ abstract class Page {
 				$this->get_menu_title(),
 				$this->get_capability(),
 				$this->get_menu_slug(),
-				$this->get_function()
+				array( $this, 'render' )
 			);
 			if( $page ) {
 				add_action( 'load-' . $page, array( $this, 'register_help_tabs' ) );
@@ -118,8 +146,8 @@ abstract class Page {
 		if( !$this->is_menu_slug_valid( $this->menu_slug ) )
 			return false;
 
-		if( !$this->is_function_valid( $this->function ) )
-			return false;
+		/*if( !$this->is_function_valid( $this->function ) )
+			return false;*/
 
 		if( !$this->is_option_group_valid( $this->option_group ) )
 			return false;
@@ -222,7 +250,7 @@ abstract class Page {
 		return false;
 	}
 
-	final public function set_function( $callback ) {
+	/*final public function set_function( $callback ) {
 		if( $this->is_function_valid( $callback ) ) {
 			$this->function = $callback;
 			return true;
@@ -239,7 +267,7 @@ abstract class Page {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	final public function set_help_tabs( $help_tabs ) {
 		if( is_array( $help_tabs ) && !empty( $help_tabs ) ) {
