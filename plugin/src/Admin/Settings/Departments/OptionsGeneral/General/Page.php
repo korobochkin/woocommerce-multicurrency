@@ -24,7 +24,9 @@ class Page extends Pages\SubMenuPage {
 			// Sidebars
 			__NAMESPACE__ . '\HelpSidebars\Overview'
 		);
+	}
 
-		$this->add_section( 'Korobochkin\WCMultiCurrency\Admin\Settings\Departments\OptionsGeneral\General\Sections\General\Section' );
+	public function register_sections() {
+		$this->add_element( new Sections\General\Section($this) );
 	}
 }
