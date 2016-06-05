@@ -30,7 +30,7 @@ abstract class Field implements \WP_Form_Component {
 			$this->get_parent_page_menu_slug(),
 			$this->get_parent_section_name(),
 			array(
-				'label_for' => $this->get_name()
+				'label_for' => $this->get_id()
 			)
 		);
 	}
@@ -64,7 +64,7 @@ abstract class Field implements \WP_Form_Component {
 	}
 
 	public function get_name() {
-		return $this->element->get_name();
+		return $this->get_parent_page_menu_slug() . '[' . $this->get_parent_section_name() . '][' . $this->element->get_name() . ']';
 	}
 
 	public function get_pre_name() {

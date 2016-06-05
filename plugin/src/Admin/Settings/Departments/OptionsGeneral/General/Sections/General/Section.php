@@ -16,14 +16,18 @@ class Section extends Prototypes\Pages\Sections\Section {
 	}
 
 	public function register_fields() {
-		$element = new Fields\FirstName( $this );
+		/*$element = new Fields\FirstName( $this );
+		$element->register_field();
+		$this->add_element( $element );*/
+
+		$element = new Fields\AppID( $this );
 		$element->register_field();
 		$this->add_element( $element );
 	}
 
 	public function render() {
 		//$this->get_children();
-		echo 'blabla';
+		echo 'Section description.';
 	}
 
 	public function sanitize() {

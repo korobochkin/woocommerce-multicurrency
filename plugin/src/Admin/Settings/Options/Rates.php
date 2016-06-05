@@ -12,10 +12,29 @@ class Rates extends Option {
 	}
 
 	public function sanitize( $instance ) {
-		return $instance;
+		//$defaults = $this->get_defaults();
+		$sanitized_instance = array();
+
+		// App ID
+		if( isset( $instance['general']['general']['app_id'] ) ) {
+			$sanitized_instance['general']['general']['app_id'] = sanitize_text_field( $instance['general']['general']['app_id'] );
+		}
+
+		return $sanitized_instance;
 	}
 
 	public function get_defaults() {
-		return array();
+		return array(
+			// page
+			'general' => array(
+
+				// section
+				'general' => array(
+
+					// settings
+					'app_id' => ''
+				)
+			)
+		);
 	}
 }
