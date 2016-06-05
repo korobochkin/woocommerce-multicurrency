@@ -1,7 +1,14 @@
 <?php
 namespace Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages;
 
-abstract class SubMenuPage {
+//use WP_Form_Aggregate;
+//use WP_Form_Component;
+
+use Korobochkin\WCMultiCurrency\Plugin;
+use WP_Form_Component;
+use WP_Form_View_Interface;
+
+abstract class SubMenuPage implements \WP_Form_Aggregate, PageInterface {
 
 	/**
 	 * @var string Example: 'options-general.php'.
@@ -52,7 +59,18 @@ abstract class SubMenuPage {
 	/**
 	 * @var \Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\Sections\Section[]
 	 */
-	private $sections = array();
+	/*private $sections = array();*/
+
+	/** @var \WP_Form_Component[] */
+	protected $elements = array();
+
+	protected $errors = array();
+
+	protected $priority;
+
+	protected $type = 'sub-menu-page';
+
+	protected $default_view = '\Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\Views\SubMenuPage';
 
 	public function __construct(
 		// For add_submenu_page()
@@ -99,6 +117,7 @@ abstract class SubMenuPage {
 				array( $this, 'render' )
 			);
 			if( $page ) {
+
 				add_action( 'load-' . $page, array( $this, 'register_help_tabs' ) );
 				add_action( 'load-' . $page, array( $this, 'register_sections' ) );
 			}
@@ -122,13 +141,13 @@ abstract class SubMenuPage {
 		}
 	}
 
-	public function register_sections() {
+	/*public function register_sections() {
 		if( $this->is_sections() ) {
 			foreach( $this->sections as $section ) {
 				$section->register();
 			}
 		}
-	}
+	}*/
 
 	final public function is_valid() {
 		if( !$this->is_parent_slug_valid( $this->parent_slug ) )
@@ -378,36 +397,82 @@ abstract class SubMenuPage {
 		//return admin_url( $this->get_parent_slug() . '?page=' . self::get_menu_slug() );
 	}
 
-
-	public function add_sections( $sections ) {
-		if( is_array( $sections ) && !empty( $sections ) ) {
-			foreach( $sections as $section ) {
-				$this->add_section( $sections );
-			}
+	public function add_element( \WP_Form_Component $element, $key = '' ) {
+		if ( empty($key) ) {
+			$key = $element->get_name();
 		}
+		if ( empty($key) ) {
+			throw new \InvalidArgumentException(__('Cannot add nameless element to a page', Plugin::NAME ));
+		}
+		if( is_a( $element, '\Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\Sections\Section' ) ) {
+			$this->elements[$key] = $element;
+		}
+		return $this;
 	}
 
-	public function add_section( $section ) {
-		if( class_exists( $section ) ) {
-			$try = new $section($this);
+	public function remove_element( $key ) {
+		if ( isset($this->elements[$key]) ) {
+			unset($this->elements[$key]);
+		}
+		return $this;
+	}
 
-			if( is_a( $try, '\Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages\Sections\Section' ) ) {
-
-				if( $try->is_valid() ) {
-					$this->sections[$try->get_id()] = $try;
+	public function get_element( $key ) {
+		if ( !empty($this->elements[$key]) ) {
+			return $this->elements[$key];
+		}
+		foreach ( $this->elements as $e ) {
+			if ( $e instanceof \WP_Form_Aggregate ) {
+				$child = $e->get_element($key);
+				if ( !empty($child) ) {
+					return $child;
 				}
 			}
 		}
+		return NULL;
 	}
 
-	public function is_sections() {
-		if( !empty( $this->sections ) ) {
-			return true;
-		}
-		return false;
+	public function get_children() {
+		$elements = \WP_Form_Element::sort_elements($this->elements);
+		return $elements;
 	}
 
-	public function remove_section( $id ) {
-		unset( $this->sections[$id] );
+	public function get_errors() {
+		return $this->errors;
+	}
+
+	public function set_error( $error ) {
+		$this->errors[] = $error;
+		return $this;
+	}
+
+	public function clear_errors() {
+		$this->errors = array();
+		return $this;
+	}
+
+	public function set_priority( $priority ) {
+		$this->priority = (int)$priority;
+		return $this;
+	}
+
+	public function get_priority() {
+		return $this->priority;
+	}
+
+	public function get_type() {
+		return $this->type;
+	}
+
+	public function get_view() {
+		return $this;
+	}
+
+	public function get_id() {
+		return $this->get_menu_slug();
+	}
+
+	public function get_name() {
+		return $this->get_id();
 	}
 }
