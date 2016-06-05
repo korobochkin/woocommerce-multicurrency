@@ -15,8 +15,8 @@ class Registrator {
 
 	public static function init() {
 
-		add_action( 'admin_menu', array( __CLASS__, 'before_register_pages' ) );
-		add_action( 'admin_menu', array( __CLASS__, 'register_pages' ) );
+		//add_action( 'admin_menu', array( __CLASS__, 'before_register_pages' ) );
+		//add_action( 'admin_menu', array( __CLASS__, 'register_pages' ) );
 
 		// Before register settings
 		add_action( 'admin_init', array( __CLASS__, 'before_register_settings' ) );
