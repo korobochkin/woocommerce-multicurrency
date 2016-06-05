@@ -35,7 +35,7 @@ class Plugin {
 		}
 
 		// Cron tasks
-		add_action( Plugin::NAME . '-update-rates', array( __NAMESPACE__ . '\Service\Cron\UpdateRates', 'run' ) );
+		//add_action( Plugin::NAME . '-update-rates', array( __NAMESPACE__ . '\Service\Cron\UpdateRates', 'run' ) );
 
 		if( is_admin() ) {
 			Admin\Admin::run();

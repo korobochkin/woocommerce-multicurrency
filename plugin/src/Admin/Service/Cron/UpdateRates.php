@@ -8,24 +8,18 @@ use OpenExchangeRates\OpenExchangeRates;
 class UpdateRates {
 
 	public static function run() {
-		/*$exchange = new OpenExchangeRates(
-			WC_MULTI_CURRENCY_APP_ID,
-			OpenExchangeRates::PROTOCOL_HTTP,
-			OpenExchangeRates::HTTP_CLIENT_CURL
-		);
-		$rates = $exchange->latest(array(
-			'base' => get_woocommerce_currency()
-		));*/
+		try {
+			$exchange = new OpenExchangeRates(
+				WC_MULTI_CURRENCY_APP_ID,
+				OpenExchangeRates::PROTOCOL_HTTP,
+				OpenExchangeRates::HTTP_CLIENT_CURL
+			);
 
-		$rates = array(
-			'kk' => 1,
-			'kk2' => 2
-		);
-
-		//$option = Admin\Settings\Registrator::$options[Plugin::NAME . '-rates'];
-
-		update_option( Plugin::NAME . '-rates', $rates );
-
-		$kk ='';
+			$rates = $exchange->latest();
+			update_option( Plugin::NAME . '-rates', $rates );
+		}
+		catch(\Exception $e) {
+			// TODO: надо бы показывать пользователю что случилось где-нибудь в виде Notice в административной части WP
+		}
 	}
 }

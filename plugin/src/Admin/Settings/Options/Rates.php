@@ -1,8 +1,8 @@
 <?php
 namespace Korobochkin\WCMultiCurrency\Admin\Settings\Options;
 
-use \Korobochkin\WCMultiCurrency\Plugin;
-use \Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Options\Option;
+use Korobochkin\WCMultiCurrency\Plugin;
+use Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Options\Option;
 use Korobochkin\WCMultiCurrency\Service\Time;
 
 class Rates extends Option {
@@ -16,18 +16,24 @@ class Rates extends Option {
 		//$defaults = $this->get_defaults();
 		$sanitized_instance = array();
 
-		// $instance from API
-		if( isset( $instance['timestamp'] ) && Time::is_timestamp( $instance['timestamp'] ) ) {
+		// Проверка достаточно простая потому все, что надо, в принципе, проверяет API и выбрасывает исключение, если
+		// что-то не так (мы его ловим внутри Cron).
+		if( property_exists( $instance, 'timestamp' ) ) {
 
-			if( isset( $instance['base'] ) && is_string( $instance['base'] ) && !empty( $instance['base'] ) ) {
+			if( property_exists( $instance, 'base' ) && is_string( $instance->base ) && !empty( $instance->base ) ) {
 
-				if( isset( $instance['rates'] ) && is_array( $instance['rates'] ) && !empty( $instance['rates'] ) ) {
+				if( property_exists( $instance, 'rates' ) ) {
 
-					$sanitized_instance['timestamp'] = $instance['timestamp'];
+					$rates = get_object_vars( $instance->rates );
 
-					$sanitized_instance['base'] = $instance['timestamp'];
+					if( is_array( $rates ) && !empty( $rates ) ) {
 
-					$sanitized_instance['rates'] = $instance['rates'];
+						$sanitized_instance['timestamp'] = $instance->timestamp;
+
+						$sanitized_instance['base'] = $instance->base;
+
+						$sanitized_instance['rates'] = $rates;
+					}
 				}
 			}
 		}
