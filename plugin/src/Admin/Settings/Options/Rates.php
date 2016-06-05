@@ -15,26 +15,14 @@ class Rates extends Option {
 		//$defaults = $this->get_defaults();
 		$sanitized_instance = array();
 
-		// App ID
-		if( isset( $instance['general']['general']['app_id'] ) ) {
-			$sanitized_instance['general']['general']['app_id'] = sanitize_text_field( $instance['general']['general']['app_id'] );
-		}
-
 		return $sanitized_instance;
 	}
 
 	public function get_defaults() {
-		return array(
-			// page
-			'general' => array(
+		return array();
+	}
 
-				// section
-				'general' => array(
-
-					// settings
-					'app_id' => ''
-				)
-			)
-		);
+	public function get_value() {
+		return get_option( $this->get_name(), $this->get_defaults() );
 	}
 }
