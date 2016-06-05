@@ -3,7 +3,7 @@ namespace Korobochkin\WCMultiCurrency\Admin\Settings\Prototypes\Pages;
 
 interface PageInterface {
 
-	function __construct(
+	/*function __construct(
 		// For add_submenu_page()
 		$parent_slug,
 		$page_title,
@@ -18,15 +18,17 @@ interface PageInterface {
 		// Help tabs & sidebar
 		$help_tabs = array(),
 		$help_sidebar = null
-	);
+	);*/
 
 	function register();
+
+	function is_valid();
+
 
 	function register_help_tabs();
 
 	function register_help_sidebar();
 
-	function is_valid();
 
 	function set_parent_slug( $slug );
 
@@ -34,11 +36,13 @@ interface PageInterface {
 
 	function is_parent_slug_valid( $slug );
 
+
 	function set_page_title( $title );
 
 	function get_page_title();
 
 	function is_page_title_valid( $title );
+
 
 	function set_menu_title( $title );
 
@@ -46,11 +50,13 @@ interface PageInterface {
 
 	function is_menu_title_valid( $title );
 
+
 	function set_capability( $cap );
 
 	function get_capability();
 
 	function is_capability_valid( $cap );
+
 
 	function set_menu_slug( $menu_slug );
 
@@ -58,11 +64,6 @@ interface PageInterface {
 
 	function is_menu_slug_valid( $menu_slug );
 
-	function set_function( $callback );
-
-	function get_function();
-
-	function is_function_valid( $callback );
 
 	function set_help_tabs( $help_tabs );
 
@@ -74,17 +75,17 @@ interface PageInterface {
 
 	function is_help_tabs();
 
+
 	function set_help_sidebar( $help_sidebar );
 
 	function get_help_sidebar();
 
 	function is_help_sidebar_valid( $help_sidebar );
 
+
 	function set_option_group( $option_group );
 
 	function get_option_group();
 
 	function is_option_group_valid( $option_group );
-
-	function render();
 }
