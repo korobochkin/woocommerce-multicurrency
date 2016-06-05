@@ -26,7 +26,7 @@ class Plugin {
 		/**
 		 * TODO: костыль
 		 */
-		if( ! defined( WC_MULTI_CURRENCY_APP_ID ) ) {
+		if( ! defined( 'WC_MULTI_CURRENCY_APP_ID' ) ) {
 			return;
 		}
 
