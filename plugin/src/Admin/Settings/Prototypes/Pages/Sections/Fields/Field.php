@@ -6,6 +6,8 @@ use WP_Form_View_Interface;
 
 abstract class Field implements \WP_Form_Component {
 
+	protected $wp_label;
+
 	/**
 	 * @var \WP_Form_Element
 	 */
@@ -23,10 +25,13 @@ abstract class Field implements \WP_Form_Component {
 	public function register_field() {
 		add_settings_field(
 			$this->get_name(),
-			$this->element->get_label(),
+			$this->get_wp_label(),
 			array( $this, 'render' ),
 			$this->get_parent_page_menu_slug(),
-			$this->get_parent_section_name()
+			$this->get_parent_section_name(),
+			array(
+				'label_for' => $this->get_name()
+			)
 		);
 	}
 
@@ -62,6 +67,10 @@ abstract class Field implements \WP_Form_Component {
 		return $this->element->get_name();
 	}
 
+	public function get_pre_name() {
+		return $this->get_parent_page_menu_slug() . '[' . $this->get_parent_section_name() . ']';
+	}
+
 	public function get_view() {
 		return $this->element->get_view();
 	}
@@ -80,5 +89,15 @@ abstract class Field implements \WP_Form_Component {
 
 	public function clear_errors() {
 		return $this->element->clear_errors();
+	}
+
+	public function set_wp_label( $label ) {
+		if( is_string( $label ) ) {
+			$this->wp_label = $label;
+		}
+	}
+
+	public function get_wp_label() {
+		return $this->wp_label;
 	}
 }
