@@ -27,6 +27,9 @@ class Page extends Pages\SubMenuPage {
 	}
 
 	public function register_sections() {
-		$this->add_element( new Sections\General\Section($this) );
+		$section = new Sections\General\Section($this);
+		$section->register();
+		$this->add_element( $section );
+
 	}
 }

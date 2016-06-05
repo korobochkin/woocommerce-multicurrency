@@ -118,7 +118,8 @@ abstract class SubMenuPage implements \WP_Form_Aggregate, PageInterface {
 			);
 			if( $page ) {
 				add_action( 'load-' . $page, array( $this, 'register_help_tabs' ) );
-				add_action( 'load-' . $page, array( $this, 'register_sections' ) );
+				//add_action( 'load-' . $page, array( $this, 'register_sections' ) );
+				$this->register_sections();
 			}
 		}
 	}
