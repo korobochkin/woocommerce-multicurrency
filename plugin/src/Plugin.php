@@ -23,6 +23,10 @@ class Plugin {
 
 	public function run() {
 
+		if( !Service\WooCommerce::is_active() ) {
+			return;
+		}
+
 		/**
 		 * TODO: костыль
 		 */
