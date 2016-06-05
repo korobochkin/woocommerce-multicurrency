@@ -21,7 +21,18 @@ class Plugin {
 		$this->plugin_ver = '0.0.1';
 	}
 
-	public function run(){
+	public function run() {
+
+		/**
+		 * TODO: костыль
+		 */
+		if( ! defined( WC_MULTI_CURRENCY_APP_ID ) ) {
+			return;
+		}
+
+		// Cron tasks
+		add_action( Plugin::NAME . '-update-rates', array( __NAMESPACE__ . '\Service\Cron\UpdateRates', 'run' ) );
+
 		if( is_admin() ) {
 			Admin\Admin::run();
 		}

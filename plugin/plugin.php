@@ -28,7 +28,7 @@ $GLOBALS['WCMultiCurrencyPlugin']->run();
  *
  * @since 0.0.1
  */
-//register_activation_hook( __FILE__, array( '\Korobochkin\WCMultiCurrency\Service\Activation', 'run' ) );
+register_activation_hook( __FILE__, array( '\Korobochkin\WCMultiCurrency\Service\Activation', 'run' ) );
 
 /**
  * Uninstall. WordPress call this when user click "Delete" link.
