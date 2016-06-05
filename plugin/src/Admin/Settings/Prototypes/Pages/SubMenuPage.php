@@ -117,7 +117,6 @@ abstract class SubMenuPage implements \WP_Form_Aggregate, PageInterface {
 				array( $this, 'render' )
 			);
 			if( $page ) {
-
 				add_action( 'load-' . $page, array( $this, 'register_help_tabs' ) );
 				add_action( 'load-' . $page, array( $this, 'register_sections' ) );
 			}
@@ -141,13 +140,7 @@ abstract class SubMenuPage implements \WP_Form_Aggregate, PageInterface {
 		}
 	}
 
-	/*public function register_sections() {
-		if( $this->is_sections() ) {
-			foreach( $this->sections as $section ) {
-				$section->register();
-			}
-		}
-	}*/
+	public function register_sections() {}
 
 	final public function is_valid() {
 		if( !$this->is_parent_slug_valid( $this->parent_slug ) )
