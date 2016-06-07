@@ -14,7 +14,7 @@ class ScriptsStyles {
 		wp_register_script(
 			$prefix . 'choose-currency',
 			$url . 'js/choose-currency/choose-currency.js',
-			array(),
+			array( 'backbone', 'jquery' ),
 			$version,
 			true
 		);

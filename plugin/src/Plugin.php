@@ -37,6 +37,7 @@ class Plugin {
 		}
 
 		add_action( 'wp_enqueue_scripts', array( __NAMESPACE__ . '\Service\ScriptsStyles', 'register' ) );
+		add_action( 'wp_enqueue_scripts', array( __NAMESPACE__ . '\Pages\All', 'wp_enqueue_scripts' ) );
 
 		// Cron tasks
 		add_action( Plugin::NAME . '-update-rates', array( __NAMESPACE__ . '\Service\Cron\UpdateRates', 'run' ) );
