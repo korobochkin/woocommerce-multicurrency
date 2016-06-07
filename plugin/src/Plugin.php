@@ -23,7 +23,7 @@ class Plugin {
 
 	public function run() {
 		// Cron tasks
-		add_action( Plugin::NAME . '-update-rates', array( 'Korobochkin\WCMultiCurrency\Admin\Service\Cron\UpdateRates', 'run' ));
+		//add_action( Plugin::NAME . '-update-rates', array( 'Korobochkin\WCMultiCurrency\Admin\Service\Cron\UpdateRates', 'run' ));
 
 		if( !Service\WooCommerce::is_active() ) {
 			return;
@@ -37,7 +37,7 @@ class Plugin {
 		}
 
 		// Cron tasks
-		//add_action( Plugin::NAME . '-update-rates', array( __NAMESPACE__ . '\Service\Cron\UpdateRates', 'run' ) );
+		add_action( Plugin::NAME . '-update-rates', array( __NAMESPACE__ . '\Service\Cron\UpdateRates', 'run' ) );
 
 		if( is_admin() ) {
 			Admin\Admin::run();
