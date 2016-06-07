@@ -10,6 +10,6 @@ class Activation {
 	}
 
 	public static function setup_cron() {
-		wp_schedule_event( time(), 'hourly', Plugin::NAME . '-update-rates' );
+		wp_schedule_event( 1, 'daily', Plugin::NAME . '-update-rates' );
 	}
 }
