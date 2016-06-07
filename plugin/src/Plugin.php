@@ -22,15 +22,8 @@ class Plugin {
 	}
 
 	public function run() {
-
-		/*add_action('init', function() {
-			register_setting('blabla', 'blabla');
-		});*/
-
 		// Cron tasks
 		add_action( Plugin::NAME . '-update-rates', array( 'Korobochkin\WCMultiCurrency\Admin\Service\Cron\UpdateRates', 'run' ));
-
-
 
 		if( !Service\WooCommerce::is_active() ) {
 			return;
