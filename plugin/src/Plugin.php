@@ -36,6 +36,8 @@ class Plugin {
 			return;
 		}
 
+		Service\ScriptsStyles::register();
+
 		// Cron tasks
 		add_action( Plugin::NAME . '-update-rates', array( __NAMESPACE__ . '\Service\Cron\UpdateRates', 'run' ) );
 
