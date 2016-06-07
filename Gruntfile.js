@@ -12,6 +12,16 @@ module.exports = function(grunt) {
                 src: 'vendor/**',
                 dest: 'plugin/'
             }
+        },
+
+        browserify: {
+            chooseCurrency: {
+                src: 'js/choose-currency/main.js',
+                dest: 'plugin/js/choose-currency/choose-currency.js',
+                options: {
+                    //require: ['jquery']
+                }
+            }
         }
 
     });
@@ -19,6 +29,11 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
 
     grunt.registerTask('default', [
-        'copy:composer'
+        'copy:composer',
+        'scriptsChooseCurrency'
+    ]);
+
+    grunt.registerTask('scriptsChooseCurrency', [
+        'browserify:chooseCurrency'
     ]);
 };
