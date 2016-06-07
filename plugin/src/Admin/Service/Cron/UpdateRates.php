@@ -15,7 +15,11 @@ class UpdateRates {
 				OpenExchangeRates::HTTP_CLIENT_CURL
 			);
 
+			/**
+			 * На бесплатном тарифе за основную валюту можно взять лишь доллар :)
+			 */
 			$rates = $exchange->latest();
+			$rates = \Korobochkin\WCMultiCurrency\Admin\Settings\Options\Rates::sanitize( $rates );
 			update_option( Plugin::NAME . '-rates', $rates );
 		}
 		catch(\Exception $e) {

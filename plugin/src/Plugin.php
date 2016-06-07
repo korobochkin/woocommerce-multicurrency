@@ -23,6 +23,15 @@ class Plugin {
 
 	public function run() {
 
+		/*add_action('init', function() {
+			register_setting('blabla', 'blabla');
+		});*/
+
+		// Cron tasks
+		add_action( Plugin::NAME . '-update-rates', array( 'Korobochkin\WCMultiCurrency\Admin\Service\Cron\UpdateRates', 'run' ));
+
+
+
 		if( !Service\WooCommerce::is_active() ) {
 			return;
 		}
@@ -40,5 +49,8 @@ class Plugin {
 		if( is_admin() ) {
 			Admin\Admin::run();
 		}
+
+		//wp_schedule_single_event( time(), Plugin::NAME . '-update-rates' );
+		// wc-multi-currency-update-rates
 	}
 }
