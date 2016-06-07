@@ -54,7 +54,7 @@ abstract class Option {
 
 	abstract public function get_defaults();
 
-	abstract public function sanitize( $instance );
+	abstract public static function sanitize( $instance );
 
 	public function get_value() {
 		$settings = get_option( $this->get_name(), array() );
