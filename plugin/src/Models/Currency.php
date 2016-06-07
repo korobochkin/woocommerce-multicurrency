@@ -2,7 +2,6 @@
 namespace Korobochkin\WCMultiCurrency\Models;
 
 use Korobochkin\WCMultiCurrency\Admin\Settings\Options;
-//use Korobochkin\WCMultiCurrency\Plugin;
 
 class Currency {
 
