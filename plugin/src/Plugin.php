@@ -36,7 +36,7 @@ class Plugin {
 			return;
 		}
 
-		Service\ScriptsStyles::register();
+		add_action( 'wp_enqueue_scripts', array( __NAMESPACE__ . '\Service\ScriptsStyles', 'register' ) );
 
 		// Cron tasks
 		add_action( Plugin::NAME . '-update-rates', array( __NAMESPACE__ . '\Service\Cron\UpdateRates', 'run' ) );
@@ -47,5 +47,13 @@ class Plugin {
 
 		//wp_schedule_single_event( time(), Plugin::NAME . '-update-rates' );
 		// wc-multi-currency-update-rates
+	}
+
+	public function get_plugin_path() {
+		return $this->plugin_path;
+	}
+
+	public function get_plugin_ver() {
+		return $this->plugin_ver;
 	}
 }
