@@ -10,6 +10,7 @@ module.exports = Backbone.View.extend({
         this.model = new WCMultiCurrency.model.page();
         this.setupDOM();
         this.createSubViews();
+        this.render();
     },
 
     setupDOM: function() {
@@ -20,5 +21,9 @@ module.exports = Backbone.View.extend({
         this.views.currencySwitcher = new WCMultiCurrency.view.currencySwitcher({
             model: new WCMultiCurrency.model.rates()
         });
+    },
+
+    render: function() {
+        this.views.currencySwitcher.render();
     }
 });
