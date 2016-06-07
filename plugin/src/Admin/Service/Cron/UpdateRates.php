@@ -4,6 +4,7 @@ namespace Korobochkin\WCMultiCurrency\Admin\Service\Cron;
 use Korobochkin\WCMultiCurrency\Admin;
 use Korobochkin\WCMultiCurrency\Plugin;
 use OpenExchangeRates\OpenExchangeRates;
+use Korobochkin\WCMultiCurrency\Admin\Settings\Options;
 
 class UpdateRates {
 
@@ -19,8 +20,10 @@ class UpdateRates {
 			 * На бесплатном тарифе за основную валюту можно взять лишь доллар :)
 			 */
 			$rates = $exchange->latest();
-			$rates = \Korobochkin\WCMultiCurrency\Admin\Settings\Options\Rates::sanitize( $rates );
-			update_option( Plugin::NAME . '-rates', $rates );
+
+			$option = new Options\Rates();
+			$rates = $option::sanitize( $rates );
+			update_option( $option->get_name(), $rates );
 		}
 		catch(\Exception $e) {
 			// TODO: надо бы показывать пользователю что случилось где-нибудь в виде Notice в административной части WP
