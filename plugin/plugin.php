@@ -1,5 +1,5 @@
 <?php
-namespace Korobochkin\WCMultiCurrency;
+use Korobochkin\WCMultiCurrency\Plugin;
 /*
 Plugin Name: WooCommerce Multi Currency
 Plugin URI: https://www.woothemes.com
