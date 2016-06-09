@@ -10,12 +10,11 @@ class Templates {
 		<script type="text/html" id="<?php echo esc_attr( Plugin::NAME ); ?>-tmpl-currency-switcher">
 			<div class="<?php echo esc_attr( Plugin::NAME ); ?> currency-switcher">
 				<select class="currency-switcher-select">
-					<%= options %>
 				</select>
 			</div>
 		</script>
 		<script type="text/html" id="<?php echo esc_attr( Plugin::NAME ); ?>-tmpl-currency-switcher-select-option">
-			<option><%- value %></option>
+			<option><%- ticker %> (<%- price %>)</option>
 		</script>
 		<?php
 	}

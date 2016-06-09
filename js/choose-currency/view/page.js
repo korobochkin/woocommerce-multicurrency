@@ -1,3 +1,5 @@
+/* global chooseCurrencyL10n */
+
 var WCMultiCurrency = window.WCMultiCurrency, $ = jQuery;
 
 module.exports = Backbone.View.extend({
@@ -8,6 +10,11 @@ module.exports = Backbone.View.extend({
 
     initialize: function() {
         this.model = new WCMultiCurrency.model.page();
+        this.collection = new WCMultiCurrency.collections.currency();
+
+        _.each(chooseCurrencyL10n.rates, this._prepareCurrencyCollection, this);
+        this.collection.add(new WCMultiCurrency.model.currency({price: 1, ticker: chooseCurrencyL10n.base}));
+
         this.setupDOM();
         this.createSubViews();
         this.render();
@@ -19,11 +26,17 @@ module.exports = Backbone.View.extend({
 
     createSubViews: function() {
         this.views.currencySwitcher = new WCMultiCurrency.view.currencySwitcher({
-            model: new WCMultiCurrency.model.rates()
+            model: this.model,
+            collection: this.collection
         });
     },
 
     render: function() {
         this.views.currencySwitcher.render();
+        $('.price').append(this.views.currencySwitcher.$el);
+    },
+
+    _prepareCurrencyCollection: function(element, index, list) {
+        this.collection.add(new WCMultiCurrency.model.currency({ticker: index, price: element}));
     }
 });

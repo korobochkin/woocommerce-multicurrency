@@ -18,6 +18,6 @@ class ScriptsStyles {
 			$version,
 			true
 		);
-		wp_localize_script( 'choose-currency', 'chooseCurrencyL10n', Js\CurrencySwitcher\Translations::get() );
+		wp_localize_script( $prefix . 'choose-currency', 'chooseCurrencyL10n', Js\CurrencySwitcher\Translations::get() );
 	}
 }

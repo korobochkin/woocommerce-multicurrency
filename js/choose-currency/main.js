@@ -9,7 +9,13 @@ window.WCMultiCurrency = WCMultiCurrency;
 WCMultiCurrency.model = {
 
     page: require('./model/page'),
-    rates: require('./model/rates')
+    currency: require('./model/currency')
+};
+
+// Collections
+WCMultiCurrency.collections = {
+
+    currency: require('./collection/currency')
 };
 
 // Views
@@ -21,3 +27,6 @@ WCMultiCurrency.view = {
     // Select
     currencySwitcher: require('./view/currency-switcher')
 };
+jQuery(document).ready(function() {
+    new WCMultiCurrency.view.page();
+});
