@@ -15,7 +15,7 @@ module.exports = Backbone.View.extend({
         _.each(chooseCurrencyL10n.rates, this._prepareCurrencyCollection, this);
         this.collection.add(new WCMultiCurrency.model.currency({price: 1, ticker: chooseCurrencyL10n.base}));
 
-        _.bindAll(this, 'setDefaultCurrency');
+        _.bindAll(this, 'setDefaultCurrency', 'refresh');
 
         this.setupDOM();
         this.createSubViews();
@@ -36,6 +36,7 @@ module.exports = Backbone.View.extend({
 
     listenEvents: function() {
         this.listenTo(this.views.currencySwitcher, 'currencyChanged', this.setDefaultCurrency);
+        this.model.on('change:currency', this.refresh);
     },
 
     render: function() {
@@ -52,5 +53,13 @@ module.exports = Backbone.View.extend({
         if( finder !== 'undefined' ) {
             this.model.set('currency', ticker);
         }
+    },
+
+    refresh: function() {
+        var redirect =
+            URI(window.location.href)
+                .addQuery('wc-multi-currency-set-default-currency', this.model.get('currency'));
+
+        window.location.href = redirect.href();
     }
 });
