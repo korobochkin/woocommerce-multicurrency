@@ -12,9 +12,17 @@ class ScriptsStyles {
 		$version = $GLOBALS['WCMultiCurrencyPlugin']->get_plugin_ver();
 
 		wp_register_script(
+			'uri',
+			$url . 'js/uri-js/URI.min.js',
+			array(),
+			'1.18.1',
+			true
+		);
+
+		wp_register_script(
 			$prefix . 'choose-currency',
 			$url . 'js/choose-currency/choose-currency.js',
-			array( 'backbone', 'jquery' ),
+			array( 'backbone', 'jquery', 'uri' ),
 			$version,
 			true
 		);

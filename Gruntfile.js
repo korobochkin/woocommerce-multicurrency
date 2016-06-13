@@ -11,6 +11,12 @@ module.exports = function(grunt) {
                 expand: true,
                 src: 'vendor/**',
                 dest: 'plugin/'
+            },
+            scriptsURI: {
+                expand: true,
+                cwd: 'node_modules/urijs/src/',
+                src: ['URI.min.js'],
+                dest: 'plugin/js/uri-js/'
             }
         },
 
@@ -30,6 +36,11 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', [
         'copy:composer',
+        'scripts'
+    ]);
+
+    grunt.registerTask('scripts', [
+        'copy:scriptsURI',
         'scriptsChooseCurrency'
     ]);
 
