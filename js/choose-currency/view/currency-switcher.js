@@ -2,6 +2,10 @@ var WCMultiCurrency = window.WCMultiCurrency, $ = jQuery;
 
 module.exports = Backbone.View.extend({
 
+    events: {
+        'change select': 'onSelectChange'
+    },
+
     DOM: {},
 
     TPL: {},
@@ -9,6 +13,8 @@ module.exports = Backbone.View.extend({
     initialize: function() {
         this.TPL.main = $('#wc-multi-currency-tmpl-currency-switcher');
         this.TPL.option = $('#wc-multi-currency-tmpl-currency-switcher-select-option');
+
+        _.bindAll(this, 'onSelectChange');
     },
 
     render: function() {
@@ -34,5 +40,9 @@ module.exports = Backbone.View.extend({
         this.$('select').append(
             _.template(this.TPL.option.html()) ({ticker: ticker, price: price })
         );
+    },
+
+    onSelectChange: function(event) {
+        this.trigger('currencyChanged', event.target.value);
     }
 });
