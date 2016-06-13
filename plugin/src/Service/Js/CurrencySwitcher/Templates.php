@@ -14,7 +14,7 @@ class Templates {
 			</div>
 		</script>
 		<script type="text/html" id="<?php echo esc_attr( Plugin::NAME ); ?>-tmpl-currency-switcher-select-option">
-			<option><%- ticker %> (<%- price %>)</option>
+			<option value="<%- ticker %>"><%- ticker %> (<%- price %>)</option>
 		</script>
 		<?php
 	}
