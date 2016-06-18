@@ -37,6 +37,7 @@ class Plugin {
 		}
 
 		// Allow users switch currency on frontend
+		Service\ChangeCurrency\Loader::init();
 		Service\ChangeCurrency\Loader::add_actions();
 
 

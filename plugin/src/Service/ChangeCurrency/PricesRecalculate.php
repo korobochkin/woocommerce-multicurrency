@@ -6,21 +6,30 @@ use Korobochkin\WCMultiCurrency\Models\Currency;
 
 class PricesRecalculate {
 
+	private static $me = false;
+
 	/**
 	 * @var \Korobochkin\WCMultiCurrency\Models\Currency
 	 */
 	private static $currency;
 
-	public static function is_proper_currency_available() {
-		if( isset( $_COOKIE[Plugin::NAME . '-currency'] ) ) {
-			$proper_currency =& $_COOKIE[Plugin::NAME . '-currency'];
+	private static $requested_currency;
 
-			self::prepare_currency( $proper_currency );
-			if( self::$currency->get_rate( $proper_currency ) ) {
+	public static function is_proper_currency_available() {
+
+		if( !self::$requested_currency ) {
+			if( !isset( $_COOKIE[Plugin::NAME . '-currency'] ) ) {
+				return false;
+			}
+
+			$requested =& $_COOKIE[Plugin::NAME . '-currency'];
+
+			self::prepare_currency( $requested );
+			if( self::$currency->get_rate( $requested ) ) {
 				return $proper_currency;
 			}
 		}
-		return false;
+		return self::$requested_currency;
 	}
 
 	public static function prepare_currency( $ticker ) {
