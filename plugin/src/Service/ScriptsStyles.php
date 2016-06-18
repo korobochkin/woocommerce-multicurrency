@@ -20,9 +20,17 @@ class ScriptsStyles {
 		);
 
 		wp_register_script(
+			'js-cookie',
+			$url . 'js/js-cookie/js.cookie.js',
+			array(),
+			'2.1.2',
+			true
+		);
+
+		wp_register_script(
 			$prefix . 'choose-currency',
 			$url . 'js/choose-currency/choose-currency.js',
-			array( 'backbone', 'jquery', 'uri' ),
+			array( 'backbone', 'jquery', 'uri', 'js-cookie' ),
 			$version,
 			true
 		);

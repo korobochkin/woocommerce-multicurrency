@@ -17,6 +17,12 @@ module.exports = function(grunt) {
                 cwd: 'node_modules/urijs/src/',
                 src: ['URI.min.js'],
                 dest: 'plugin/js/uri-js/'
+            },
+            scriptsCookie: {
+                expand: true,
+                cwd: 'node_modules/js-cookie/src/',
+                src: ['js.cookie.js'],
+                dest: 'plugin/js/js-cookie/'
             }
         },
 
@@ -41,6 +47,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('scripts', [
         'copy:scriptsURI',
+        'copy:scriptsCookie',
         'scriptsChooseCurrency'
     ]);
 
