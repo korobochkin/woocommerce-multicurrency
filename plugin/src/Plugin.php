@@ -5,9 +5,9 @@ class Plugin {
 
 	const NAME = 'wc-multi-currency';
 
-	private $plugin_path = NULL;
+	private $path = NULL;
 
-	private $plugin_ver;
+	private $version;
 
 	/**
 	 * Setup plugin object.
@@ -55,10 +55,10 @@ class Plugin {
 	}
 
 	public function get_plugin_path() {
-		return $this->plugin_path;
+		return $this->path;
 	}
 
 	public function get_plugin_ver() {
-		return $this->plugin_ver;
+		return $this->version;
 	}
 }
