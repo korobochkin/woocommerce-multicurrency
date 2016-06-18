@@ -30,6 +30,7 @@ module.exports = Backbone.View.extend({
 
     setupDOM: function() {
         this.DOM.html = $('html');
+        this.DOM.body = $('body');
     },
 
     createSubViews: function() {
@@ -46,7 +47,15 @@ module.exports = Backbone.View.extend({
 
     render: function() {
         this.views.currencySwitcher.render();
-        $('.price').append(this.views.currencySwitcher.$el);
+
+        // Single Product
+        if( this.DOM.body.hasClass('single-product') ) {
+            $('.price').append(this.views.currencySwitcher.$el);
+        }
+        // Shop page (all products)
+        else if( this.DOM.body.hasClass('post-type-archive-product') ) {
+            $('#main.site-main').append(this.views.currencySwitcher.$el);
+        }
     },
 
     _prepareCurrencyCollection: function(element, index, list) {
