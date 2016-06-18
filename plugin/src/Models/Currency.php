@@ -34,6 +34,10 @@ class Currency {
 		return false;
 	}
 
+	public function get_ticker() {
+		return $this->ticker;
+	}
+
 	public function get_rate( $cross_ticker ) {
 		$option = $this->option->get_value();
 
