@@ -15,6 +15,11 @@ module.exports = Backbone.View.extend({
         _.each(chooseCurrencyL10n.rates, this._prepareCurrencyCollection, this);
         this.collection.add(new WCMultiCurrency.model.currency({price: 1, ticker: chooseCurrencyL10n.base}));
 
+        var requestedCurrency = Cookies.get('wc-multi-currency-currency');
+        if( requestedCurrency !== 'undefined' ) {
+            this.model.set('currency', requestedCurrency);
+        }
+
         _.bindAll(this, 'setDefaultCurrency', 'refresh');
 
         this.setupDOM();

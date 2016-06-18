@@ -27,6 +27,10 @@ module.exports = Backbone.View.extend({
 
         this.collection.each(this._render_option, this);
 
+        // selected="selected" for current currency
+        this.$('option[value="' + this.model.get('currency') + '"]').attr('selected','selected');
+
+
         /*this.$el.html(
             _.template(template, {options: options})
         );*/
