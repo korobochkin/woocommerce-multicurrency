@@ -1,0 +1,23 @@
+{
+  "name": "woocommerce-multicurrency",
+  "version": "0.0.1",
+  "description": "wc multu currency",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:korobochkin/woocommerce-multicurrency.git"
+  },
+  "author": "Kolya Korobochkin",
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "js-cookie": "github:js-cookie/js-cookie",
+    "load-grunt-tasks": "^3.5.0",
+    "urijs": "github:medialize/URI.js"
+  }
+}
