@@ -36,7 +36,9 @@ class Plugin {
 			return;
 		}
 
-		add_action( 'plugins_loaded', array( __NAMESPACE__ . '\Service\ChangeCurrency', 'handle_request' ) );
+		// Allow users switch currency on frontend
+		Service\ChangeCurrency\Loader::add_actions();
+
 
 		add_action( 'wp_enqueue_scripts', array( __NAMESPACE__ . '\Service\ScriptsStyles', 'register' ) );
 		add_action( 'wp_enqueue_scripts', array( __NAMESPACE__ . '\Pages\All', 'wp_enqueue_scripts' ) );
