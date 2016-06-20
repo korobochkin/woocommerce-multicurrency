@@ -12,7 +12,7 @@ class Rates extends Option {
 		parent::__construct( Plugin::NAME . '-rates', Plugin::NAME . '-rates' );
 	}
 
-	public static function sanitize( $instance ) {
+	public function sanitize( $instance ) {
 		//$defaults = $this->get_defaults();
 		$sanitized_instance = array();
 

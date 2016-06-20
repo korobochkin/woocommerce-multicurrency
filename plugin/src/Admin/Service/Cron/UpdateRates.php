@@ -22,7 +22,7 @@ class UpdateRates {
 			$rates = $exchange->latest();
 
 			$option = new Options\Rates();
-			$rates = $option::sanitize( $rates );
+			$rates = $option->sanitize( $rates );
 			update_option( $option->get_name(), $rates );
 		}
 		catch(\Exception $e) {
