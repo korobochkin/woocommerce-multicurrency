@@ -18,7 +18,7 @@ class Plugin {
 	 */
 	public function __construct( $run_from_file ) {
 		$this->path = $run_from_file;
-		$this->version = '0.0.1';
+		$this->version = '0.0.2';
 	}
 
 	public function run() {
